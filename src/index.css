@@ -1,0 +1,50 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #3b82f6;
+  --color-secondary: #ec4899;
+  --color-background: #0f172a;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: var(--color-background);
+  color: white;
+}
+
+/* 
+   REVOLUTIONARY LAYER SWAP: 
+   We put the edges container ABOVE the nodes container by default.
+   This allows lines to look like they are plugged into the front of the switch.
+*/
+.react-flow__edges {
+  z-index: 10 !important;
+  pointer-events: none !important;
+  /* Allow clicking through the SVG pane to nodes */
+}
+
+.react-flow__edge {
+  pointer-events: all !important;
+  /* But let the individual lines catch clicks/hovers */
+}
+
+.react-flow__nodes {
+  z-index: 5 !important;
+}
+
+/* Ensure the edge labels are even higher than the edges themselves */
+.react-flow__edge-labels {
+  z-index: 20 !important;
+}
+
+/* When a node is selected, we might want it to pop up, 
+   but for cabling visualization, cables on top is usually better. */
+.react-flow__node.selected {
+  z-index: 15 !important;
+}

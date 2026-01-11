@@ -1,16 +1,366 @@
-# React + Vite
+# DrawVLAN - 交互式网络拓扑设计器
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<div align="center">
 
-Currently, two official plugins are available:
+![Version](https://img.shields.io/badge/版本-1.0.0-blue.svg)
+![React](https://img.shields.io/badge/React-18.3.1-61DAFB?logo=react)
+![License](https://img.shields.io/badge/许可证-MIT-green.svg)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**专业级实时网络拓扑可视化与配置工具**
 
-## React Compiler
+[功能特性](#-功能特性) • [快速开始](#-快速开始) • [使用文档](#-使用文档) • [技术架构](#-技术架构)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+</div>
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 📋 项目概述
+
+DrawVLAN 是一款基于 React 和 ReactFlow 构建的现代化交互式网络拓扑设计工具。它为网络工程师和管理员提供了直观的可视化界面，用于设计、配置和监控网络基础设施，并支持实时流量可视化。
+
+### 🎯 核心亮点
+
+- **可视化网络设计**：拖拽式交换机和终端设备布局
+- **实时流量监控**：每个端口的实时 RX/TX 指示器
+- **VLAN 配置**：逐端口 PVID 和 VLAN 列表管理
+- **双向流量控制**：配置全双工、仅发送或仅接收模式
+- **智能端口吸附**：终端设备自动吸附到交换机端口
+- **专业级界面**：深色主题、玻璃态设计、流畅动画
+
+---
+
+## ✨ 功能特性
+
+### 🔌 网络组件
+
+#### 交换机节点
+- **20 端口千兆交换机**
+  - 16 个接入端口（GE 1-16）
+  - 4 个上行端口（17-20）
+- **逐端口配置**
+  - PVID（端口 VLAN ID）
+  - VLAN 成员列表
+  - 流量方向控制
+- **实时状态指示器**
+  - 绿色 LED：端口已连接
+  - 黄色（TX）：数据发送
+  - 绿色（RX）：数据接收
+
+#### 终端节点
+- **设备类型**
+  - 标准 PC
+  - 数据服务器
+  - 笔记本电脑
+  - 平板电脑
+- **智能吸附**
+  - 拖拽到交换机端口
+  - 40px 范围内自动吸附
+  - 可视化连接反馈
+- **流量配置**
+  - 全双工（双向）
+  - 仅发送（TX）
+  - 仅接收（RX）
+
+#### 网络线缆
+- **可视化流向指示**
+  - 黄色线条：TX 方向
+  - 绿色线条：RX 方向
+  - 双色线条：双向通信
+- **动态标签**
+  - 自动生成线缆名称
+  - 可自定义描述
+  - 按需显示/隐藏
+
+### 🎨 用户界面
+
+#### 高级配置面板
+- **多标签页界面**
+  - VLAN 设置
+  - 终端属性
+  - 线缆管理
+- **智能标签页切换**
+  - 自动检测端口状态
+  - 上下文感知导航
+- **实时更新**
+  - 更改实时预览
+  - 即时视觉反馈
+
+#### 标签显示控制
+- **精细化可见性**
+  - 独立的线缆标签开关
+  - 独立的终端标签开关
+  - 悬停显示模式
+- **智能过滤**
+  - 减少视觉混乱
+  - 聚焦特定元素
+
+#### 对象管理
+- **层级列表视图**
+  - 所有交换机及端口数量
+  - 所有终端及状态
+  - 所有线缆及端点
+- **快捷操作**
+  - 聚焦/缩放到元素
+  - 带确认的删除
+  - 批量操作
+
+### 🔧 高级功能
+
+#### 流量可视化
+- **交换机中心化逻辑**
+  - 端口 RX/TX 反映交换机视角
+  - 终端互斥映射
+  - 精确的双向显示
+- **颜色编码状态**
+  - 琥珀色/黄色：发送（TX）
+  - 绿色：接收（RX）
+  - 双指示器：全双工
+
+#### 撤销/重做系统
+- **完整历史追踪**
+  - 节点添加/删除
+  - 边缘修改
+  - 配置更改
+- **键盘快捷键**
+  - Ctrl+Z：撤销
+  - Ctrl+Y：重做
+
+#### 端口独占性
+- **每端口一个连接**
+  - 防止重复预订
+  - 可视化占用指示器
+  - 自动验证
+
+---
+
+## 🚀 快速开始
+
+### 环境要求
+
+- Node.js 16+ 
+- npm 或 yarn
+
+### 安装步骤
+
+```bash
+# 克隆仓库
+git clone https://github.com/yourusername/DrawVLAN.git
+
+# 进入项目目录
+cd DrawVLAN
+
+# 安装依赖
+npm install
+
+# 启动开发服务器
+npm run dev
+```
+
+应用将在 `http://localhost:5173` 运行
+
+### 生产构建
+
+```bash
+npm run build
+```
+
+---
+
+## 📖 使用文档
+
+### 基础操作
+
+#### 1. 添加交换机
+- 点击顶部工具栏的 **"+ Switch"** 按钮
+- 拖拽到画布上定位
+- 双击打开配置面板
+
+#### 2. 添加终端
+- 点击 **"+ Terminal"** 按钮
+- 将终端拖拽到交换机端口附近（40px 内）
+- 终端自动吸附到可用端口
+- 配置设备类型和流量模式
+
+#### 3. 创建线缆
+- **方法 1**：从一个交换机端口拖拽到另一个
+- **方法 2**：使用交换机配置面板
+  - 选择源端口
+  - 导航到"添加线缆"标签页
+  - 选择目标交换机和端口
+  - 设置流量方向
+
+#### 4. 配置 VLAN
+- 双击交换机打开面板
+- 选择一个端口
+- 导航到"VLAN 设置"标签页
+- 设置 PVID 和 VLAN 列表
+
+#### 5. 管理标签
+- 点击工具栏中的 **"Labels"** 按钮
+- 切换"线缆标签"显示连接名称
+- 切换"终端标签"显示设备名称
+
+### 高级配置
+
+#### 流量方向模式
+
+**终端设备：**
+- **全双工**：双向通信（TX 和 RX 均激活）
+- **端口 RX（输入）**：终端发送 → 交换机接收
+- **端口 TX（输出）**：交换机发送 → 终端接收
+
+**线缆连接：**
+- **双向**：全双工链路
+- **RX（来自远端）**：从远端交换机接收
+- **TX（发往远端）**：发送到远端交换机
+
+#### 端口状态指示器
+
+位于交换机每个端口内部：
+- **顶部 LED**：连接状态（绿色 = 已连接）
+- **TX 指示器**：黄色圆点 + "TX" 标签
+- **RX 指示器**：绿色圆点 + "RX" 标签
+
+---
+
+## 🏗 技术架构
+
+### 技术栈
+
+- **前端框架**：React 18.3.1
+- **流程图库**：ReactFlow 12.3.4
+- **样式框架**：TailwindCSS 3.4.17
+- **图标库**：Lucide React
+- **动画库**：Framer Motion
+- **构建工具**：Vite 6.0.5
+
+### 项目结构
+
+```
+DrawVLAN/
+├── src/
+│   ├── components/
+│   │   ├── TopologyMap.jsx       # 主画布与状态管理
+│   │   ├── SwitchNode.jsx        # 交换机可视化组件
+│   │   ├── SwitchFaceplate.jsx   # 交换机配置面板
+│   │   ├── TerminalNode.jsx      # 终端设备组件
+│   │   ├── NetworkEdge.jsx       # 线缆连接组件
+│   │   ├── EdgeConfig.jsx        # 线缆配置对话框
+│   │   ├── TerminalConfig.jsx    # 终端配置对话框
+│   │   └── ObjectList.jsx        # 对象管理侧边栏
+│   ├── App.jsx                   # 应用入口
+│   ├── index.css                 # 全局样式
+│   └── main.jsx                  # React DOM 渲染器
+├── public/                       # 静态资源
+├── package.json                  # 依赖与脚本
+├── vite.config.js               # Vite 配置
+├── tailwind.config.js           # TailwindCSS 配置
+└── README.md                    # 本文件
+```
+
+### 组件层级
+
+```
+TopologyMap（根组件）
+├── ReactFlow
+│   ├── SwitchNode（多个实例）
+│   ├── TerminalNode（多个实例）
+│   └── NetworkEdge（多个实例）
+├── SwitchFaceplate（模态框）
+├── EdgeConfig（模态框）
+├── TerminalConfig（模态框）
+└── ObjectList（面板）
+```
+
+### 状态管理
+
+- **节点状态**：由 ReactFlow 的 `useNodesState` 管理
+- **边缘状态**：由 ReactFlow 的 `useEdgesState` 管理
+- **撤销/重做**：基于快照的自定义 Hook
+- **流量映射**：通过 `useMemo` 实时计算
+
+### 数据流
+
+1. **用户交互** → 组件事件处理器
+2. **事件处理器** → 状态更新（带快照）
+3. **状态更新** → `useMemo` 重新计算
+4. **重新计算** → Props 注入
+5. **Props 注入** → 组件重新渲染
+
+---
+
+## 🎨 设计理念
+
+### 视觉层级
+
+1. **主要操作**：蓝色（添加交换机、连接）
+2. **数据发送**：琥珀色/黄色（TX 指示器）
+3. **数据接收**：绿色（RX 指示器、连接状态）
+4. **警告**：红色（删除操作、错误）
+5. **中性**：石板灰/灰色（UI 框架、禁用状态）
+
+### 交互模式
+
+- **双击**：打开配置
+- **拖拽**：移动或连接元素
+- **悬停**：显示额外信息
+- **点击**：选择或切换
+
+### 可访问性
+
+- 高对比度配色方案
+- 清晰的视觉反馈
+- 键盘导航支持
+- 描述性标签和工具提示
+
+---
+
+## 🔮 开发路线图
+
+### 计划功能
+
+- [ ] 导出拓扑为 PNG/SVG
+- [ ] 导入/导出配置 JSON
+- [ ] 多 VLAN 可视化层
+- [ ] 生成树协议（STP）模拟
+- [ ] 链路聚合（LAG）支持
+- [ ] 自定义交换机型号
+- [ ] 网络性能指标
+- [ ] 协作编辑模式
+
+---
+
+## 🤝 贡献指南
+
+欢迎贡献！请随时提交 Pull Request。
+
+### 开发准则
+
+1. 遵循现有代码风格
+2. 为复杂逻辑添加注释
+3. 提交前充分测试
+4. 根据需要更新文档
+
+---
+
+## 📄 开源许可
+
+本项目采用 MIT 许可证 - 详见 LICENSE 文件
+
+---
+
+## 🙏 致谢
+
+- [ReactFlow](https://reactflow.dev/) - 强大的流程图库
+- [Lucide](https://lucide.dev/) - 精美的图标集
+- [TailwindCSS](https://tailwindcss.com/) - 实用优先的 CSS 框架
+
+---
+
+<div align="center">
+
+**为网络工程师用心打造 ❤️**
+
+[报告问题](https://github.com/yourusername/DrawVLAN/issues) • [功能建议](https://github.com/yourusername/DrawVLAN/issues)
+
+</div>
